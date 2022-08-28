@@ -10,11 +10,75 @@
     <script>
         function getComputerChoice() {
             let computerChoice = ["rock", "paper", "scissors"];
-            let randomN = Math.floor(Math.random() * computerChoice.length);
+            let randomNum = Math.floor(Math.random() * computerChoice.length);
             return computerChoice[randomNum];
+        } 
+
+        function playRound(playerSelection, computerSelection) {
+            switch(true) {
+                case (playerSelection === "rock" && computerSelection == "paper"):
+                    console.log("You Lose! Paper beats Rock"); 
+                    computerScore += 1;
+                    round += 1;
+                    console.log(computerScore);
+                    break;
+                case (playerSelection === "rock" && computerSelection == "scissors"):
+                    console.log("You Win! Rock beats Scissors"); 
+                    playerScore += 1;
+                    round += 1;
+                    console.log(playerScore);
+                    break;
+                case (playerSelection === "paper" && computerSelection == "scissors"):
+                    console.log("You Lose! Scissors beats Paper"); 
+                    computerScore += 1;
+                    round += 1;
+                    console.log(computerScore);
+                    break;
+                case (playerSelection === "paper" && computerSelection == "rock"):
+                    console.log("You Win! Paper beats Rock"); 
+                    playerScore += 1;
+                    round += 1;
+                    console.log(playerScore);
+                    break;
+                case (playerSelection === "scissors" && computerSelection == "rock"):
+                    console.log("You Lose! Rock beats Scissors"); 
+                    computerScore += 1;
+                    round += 1;
+                    console.log(computerScore);
+                    break;
+                case (playerSelection === "scissors" && computerSelection == "paper"):
+                    console.log("You Win! Scissors beats Paper"); 
+                    playerScore += 1;
+                    round += 1;
+                    console.log(playerScore);
+                    break;
+                default:
+                    console.log(`You both guessed "${playerSelection}" RETRY!`);
+                    break;
+            }
         }
 
-        console.log("Computer Choice: ", getComputerChoice());
+        function game() {
+            while(playerScore < 3 || computerScore < 3) {
+
+                
+            }
+
+            if (playerScore == 3) { console.log(`Congrats you won in the ${round} round.`) }
+            else if (computerScore == 3) { console.log(`Bad luck you lost in the ${round} round.`) }
+        }
+
+        let round = 0;
+        let computerScore = 0;
+        let playerScore = 0;
+        let playerSelection = "paper";
+        const computerSelection = getComputerChoice();
+        playerSelection = playerSelection.toLowerCase();
+
+
+        console.log(playRound(playerSelection, computerSelection));
+        console.log("Computer Choice: ", computerSelection);
+        console.log("Player Choice: ", playerSelection);
     </script>
 </body>
 </html>
