@@ -7,82 +7,140 @@
     <title>Document</title>
 </head>
 <body>
+    <button onClick="rock()">Rock</button>
+    <button onClick="paper()">Paper</button>
+    <button onClick="scissors()">Scissors</button>
+    <button onClick="resetGame()">Restart</button>
+    
+    <!-- <button onClick="onClick()">Click me</button> Use as reference -->
+
+
+    <div id="scores">
+        <div><br>Player Score: <a id="playerScore">0</a></div>
+        <div>Computer Score: <a id="computerScore">0</a></div>
+
+        <!-- <div>Clicks: <a id="clicks">0</a></div> Use as reference -->
+    </div>
+
     <script>
+        // function onClick() { // Use as reference
+        //     clicks += 1;
+        //     document.getElementById("clicks").innerHTML = clicks;
+        // }
+
         function getComputerChoice() {
             let computerChoice = ["rock", "paper", "scissors"];
             let randomNum = Math.floor(Math.random() * computerChoice.length);
             return computerChoice[randomNum];
-        } 
+        }
 
         function playRound(playerSelection, computerSelection) {
             switch(true) {
                 case (playerSelection === "rock" && computerSelection == "paper"):
-                    console.log("You Lose! Paper beats Rock"); 
-                    computerScore += 1;
-                    round += 1;
-                    console.log(computerScore);
+                    computerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === "rock" && computerSelection == "scissors"):
-                    console.log("You Win! Rock beats Scissors"); 
-                    playerScore += 1;
-                    round += 1;
-                    console.log(playerScore);
+                    playerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === "paper" && computerSelection == "scissors"):
-                    console.log("You Lose! Scissors beats Paper"); 
-                    computerScore += 1;
-                    round += 1;
-                    console.log(computerScore);
+                    computerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === "paper" && computerSelection == "rock"):
-                    console.log("You Win! Paper beats Rock"); 
-                    playerScore += 1;
-                    round += 1;
-                    console.log(playerScore);
+                    playerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === "scissors" && computerSelection == "rock"):
-                    console.log("You Lose! Rock beats Scissors"); 
-                    computerScore += 1;
-                    round += 1;
-                    console.log(computerScore);
+                    computerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === "scissors" && computerSelection == "paper"):
-                    console.log("You Win! Scissors beats Paper"); 
-                    playerScore += 1;
-                    round += 1;
-                    console.log(playerScore);
+                    playerWon(playerSelection, computerSelection);
                     break;
+
                 case (playerSelection === computerSelection):
                     console.log(`You both guessed "${playerSelection}" RETRY!`);
                     break;
-                default:
-                    console.log(`ERROR! ${playerSelection} is not Rock, Paper or Scissors`);
-                    
+            }
+        }
+
+        function computerWon(playerSelection, computerSelection) {
+            console.log(`You Lose! ${playerSelection} beats ${computerSelection}`); 
+                    computerScore += 1;
+                    round += 1;
+        }
+
+        function playerWon(playerSelection, computerSelection) {
+            console.log(`You Win! ${playerSelection} beats ${computerSelection}`); 
+                    playerScore += 1;
+                    round += 1;
+        }
+
+        function rock() {
+            let playerSelection = "rock";
+            console.log("rock");
+            playRound(playerSelection, getComputerChoice());
+
+            document.getElementById("playerScore").innerHTML = playerScore;
+            document.getElementById("computerScore").innerHTML = computerScore;
+
+            gameOver();
+        }
+        
+        function paper() {
+            let playerSelection = "paper";
+            console.log("paper");
+            playRound(playerSelection, getComputerChoice());
+
+            document.getElementById("playerScore").innerHTML = playerScore;
+            document.getElementById("computerScore").innerHTML = computerScore;
+
+            gameOver();
+        }
+
+        function scissors() {
+            let playerSelection = "scissors";
+            console.log("scissors");
+            playRound(playerSelection, getComputerChoice());
+
+            document.getElementById("playerScore").innerHTML = playerScore;
+            document.getElementById("computerScore").innerHTML = computerScore;
+
+            gameOver();
+        }
+
+        function resetGame() {
+            console.log("!Game Reset!");
+
+            round = 0;
+            computerScore = 0;
+            playerScore = 0;
+
+            document.getElementById("playerScore").innerHTML = playerScore;
+            document.getElementById("computerScore").innerHTML = computerScore;
+        }
+
+        function gameOver() {
+            if (playerScore == 3) {
+                alert(`Congrats you won in the ${round} round.`);
+                alert(`The Official Score was:\nYour Score: ${playerScore}\nComputer Score: ${computerScore}`);
+
+                resetGame();
+            }
+            else if (computerScore == 3) {
+                alert(`Bad luck you lost in the ${round} round.`);
+                alert(`The Official Score was:\nYour Score: ${playerScore}\nComputer Score: ${computerScore}`);
+
+                resetGame();
             }
         }
         
-        function game() {
-            while(playerScore < 3 || computerScore < 3) {
-                let playerSelection = prompt("What do you choose Rock, Paper or Scissors: ");
-                playerSelection = playerSelection.toLowerCase();
-                const computerSelection = getComputerChoice();
-
-                playRound(playerSelection, computerSelection);
-                if (playerScore == 3 || computerScore == 3) { break; }
-            }
-
-            if (playerScore == 3) { console.log(`Congrats you won in the ${round} round.`) }
-            else if (computerScore == 3) { console.log(`Bad luck you lost in the ${round} round.`) }
-
-            console.log(`The Official Score was:\nYour Score: ${playerScore}\nComputer Score: ${computerScore}`)
-        }
-
         let round = 0;
         let computerScore = 0;
         let playerScore = 0;
-
-        game()
-
+        // let clicks = 0;
     </script>
 </body>
 </html>
