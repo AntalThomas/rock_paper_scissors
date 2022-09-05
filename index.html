@@ -18,6 +18,7 @@
     <div id="scores">
         <div><br>Player Score: <a id="playerScore">0</a></div>
         <div>Computer Score: <a id="computerScore">0</a></div>
+        <div><a id="sameChoice">------------------</a></div>
 
         <!-- <div>Clicks: <a id="clicks">0</a></div> Use as reference -->
     </div>
@@ -62,18 +63,23 @@
 
                 case (playerSelection === computerSelection):
                     console.log(`You both guessed "${playerSelection}" RETRY!`);
+                    document.getElementById("sameChoice").innerHTML = `You both guessed "${playerSelection}" RETRY!`;
                     break;
             }
         }
 
         function computerWon(playerSelection, computerSelection) {
-            console.log(`You Lose! ${playerSelection} beats ${computerSelection}`); 
+            console.log(`You Lose! ${playerSelection} beats ${computerSelection}`);
+            document.getElementById("sameChoice").innerHTML = "------------------";
+
                     computerScore += 1;
                     round += 1;
         }
 
         function playerWon(playerSelection, computerSelection) {
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`); 
+            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+            document.getElementById("sameChoice").innerHTML = "------------------";
+
                     playerScore += 1;
                     round += 1;
         }
@@ -120,6 +126,7 @@
 
             document.getElementById("playerScore").innerHTML = playerScore;
             document.getElementById("computerScore").innerHTML = computerScore;
+            document.getElementById("sameChoice").innerHTML = "------------------";
         }
 
         function gameOver() {
