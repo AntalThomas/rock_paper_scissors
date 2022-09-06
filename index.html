@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="script.js"></script>
+    <title>Rock Paper  Scissors</title>
 </head>
 <body>
     <button onClick="rock()">Rock</button>
@@ -22,132 +23,5 @@
 
         <!-- <div>Clicks: <a id="clicks">0</a></div> Use as reference -->
     </div>
-
-    <script>
-        // function onClick() { // Use as reference
-        //     clicks += 1;
-        //     document.getElementById("clicks").innerHTML = clicks;
-        // }
-
-        function getComputerChoice() {
-            let computerChoice = ["rock", "paper", "scissors"];
-            let randomNum = Math.floor(Math.random() * computerChoice.length);
-            return computerChoice[randomNum];
-        }
-
-        function playRound(playerSelection, computerSelection) {
-            switch(true) {
-                case (playerSelection === "rock" && computerSelection == "paper"):
-                    computerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === "rock" && computerSelection == "scissors"):
-                    playerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === "paper" && computerSelection == "scissors"):
-                    computerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === "paper" && computerSelection == "rock"):
-                    playerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === "scissors" && computerSelection == "rock"):
-                    computerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === "scissors" && computerSelection == "paper"):
-                    playerWon(playerSelection, computerSelection);
-                    break;
-
-                case (playerSelection === computerSelection):
-                    console.log(`You both guessed "${playerSelection}" RETRY!`);
-                    document.getElementById("sameChoice").innerHTML = `You both guessed "${playerSelection}" RETRY!`;
-                    break;
-            }
-        }
-
-        function computerWon(playerSelection, computerSelection) {
-            console.log(`You Lose! ${playerSelection} beats ${computerSelection}`);
-            document.getElementById("sameChoice").innerHTML = "------------------";
-
-                    computerScore += 1;
-                    round += 1;
-        }
-
-        function playerWon(playerSelection, computerSelection) {
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
-            document.getElementById("sameChoice").innerHTML = "------------------";
-
-                    playerScore += 1;
-                    round += 1;
-        }
-
-        function rock() {
-            let playerSelection = "rock";
-            console.log("rock");
-            playRound(playerSelection, getComputerChoice());
-
-            document.getElementById("playerScore").innerHTML = playerScore;
-            document.getElementById("computerScore").innerHTML = computerScore;
-
-            gameOver();
-        }
-        
-        function paper() {
-            let playerSelection = "paper";
-            console.log("paper");
-            playRound(playerSelection, getComputerChoice());
-
-            document.getElementById("playerScore").innerHTML = playerScore;
-            document.getElementById("computerScore").innerHTML = computerScore;
-
-            gameOver();
-        }
-
-        function scissors() {
-            let playerSelection = "scissors";
-            console.log("scissors");
-            playRound(playerSelection, getComputerChoice());
-
-            document.getElementById("playerScore").innerHTML = playerScore;
-            document.getElementById("computerScore").innerHTML = computerScore;
-
-            gameOver();
-        }
-
-        function resetGame() {
-            console.log("!Game Reset!");
-
-            round = 0;
-            computerScore = 0;
-            playerScore = 0;
-
-            document.getElementById("playerScore").innerHTML = playerScore;
-            document.getElementById("computerScore").innerHTML = computerScore;
-            document.getElementById("sameChoice").innerHTML = "------------------";
-        }
-
-        function gameOver() {
-            if (playerScore == 3) {
-                alert(`Congrats you won in the ${round} round.`);
-                alert(`The Official Score was:\nYour Score: ${playerScore}\nComputer Score: ${computerScore}`);
-
-                resetGame();
-            }
-            else if (computerScore == 3) {
-                alert(`Bad luck you lost in the ${round} round.`);
-                alert(`The Official Score was:\nYour Score: ${playerScore}\nComputer Score: ${computerScore}`);
-
-                resetGame();
-            }
-        }
-        
-        let round = 0;
-        let computerScore = 0;
-        let playerScore = 0;
-        // let clicks = 0;
-    </script>
 </body>
 </html>
